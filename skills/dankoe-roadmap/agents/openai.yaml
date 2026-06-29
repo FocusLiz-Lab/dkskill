@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dankoe Roadmap"
+  short_description: "Plan solo-business paths with IMA grounding"
+  default_prompt: "$dankoe-roadmap 帮我规划一人公司路线"

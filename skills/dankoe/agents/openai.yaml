@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dankoe"
+  short_description: "Route Dankoe workflows with IMA grounding"
+  default_prompt: "$dankoe 我想做一个一人公司，帮我判断该从哪里开始"

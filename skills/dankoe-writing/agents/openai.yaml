@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dankoe Writing"
+  short_description: "Write essays and posts with IMA grounding"
+  default_prompt: "$dankoe-writing 帮我把一个想法扩展成公众号文章，再拆成5条短内容"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dankoe AI System"
+  short_description: "Design AI workflows with IMA grounding"
+  default_prompt: "$dankoe-ai-system 帮我设计一人公司的AI工作流"

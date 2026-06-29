@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dankoe Learning Map"
+  short_description: "Guide Dankoe learning with IMA grounding"
+  default_prompt: "$dankoe-learning-map 我是做自媒体的，先看哪些？"

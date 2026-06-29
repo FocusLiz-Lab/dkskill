@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dankoe IMA"
+  short_description: "Optional IMA retrieval bridge"
+  default_prompt: "$dankoe-ima 搜索内容地图并给我检索摘要"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dankoe Content"
+  short_description: "Build content maps with IMA grounding"
+  default_prompt: "$dankoe-content 帮我做自媒体内容地图"

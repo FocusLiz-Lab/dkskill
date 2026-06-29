@@ -1,0 +1,7 @@
+interface:
+  display_name: "Dankoe Offer"
+  short_description: "Design offers with IMA grounding"
+  default_prompt: "$dankoe-offer 帮我把一个技能设计成可卖的offer"
+
+policy:
+  allow_implicit_invocation: true
