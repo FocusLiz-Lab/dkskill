@@ -1,4 +1,4 @@
-# dankoe-skills
+# dkskill
 
 Dankoe-style one-person company skill toolbox.
 
@@ -6,18 +6,20 @@ This repository packages a set of Agent skills for learning Dan Koe-style materi
 
 可在 Codex、Claude Code、Cursor、Trae Solo 等支持 skill / system prompt 的 Agent 上使用。
 
-**最新版本：v0.3.5**
+**最新版本：v0.3.6**
+
+**v0.3.6 更新**：项目更名为 `dkskill`，GitHub 仓库同步更名。README 新增更新方式和知识库加入说明。
 
 **v0.3.5 更新**：整套 Dankoe workflow skills 默认使用 IMA 知识库「Dankoe 终极版 | 深度觉醒（持续更新）」作为资料来源。用户不需要单独调用 `$dankoe-ima`；`$dankoe-content`、`$dankoe-writing`、`$dankoe-learning-map` 等原有 skill 会默认先检索 IMA，再输出工作流结果。
 
 ---
 
-## 如何安装 dankoe-skills
+## 如何安装 dkskill
 
 ### 通用安装方式（适用于 Codex / Claude Code）
 
 ```bash
-npx -y skills add FocusLiz-Lab/dankoe-skills -g --all
+npx -y skills add FocusLiz-Lab/dkskill -g --all
 ```
 
 安装后可以直接使用：
@@ -36,7 +38,7 @@ $dankoe-offer 帮我把个人成长陪跑设计成可卖的offer
 
 ### Trae Solo / 手动上传
 
-从 GitHub Releases 下载最新的 `dankoe-skills-版本号.zip`。
+从 GitHub Releases 下载最新的 `dkskill-版本号.zip`。
 
 解压后里面是多个独立 skill zip：
 
@@ -74,6 +76,37 @@ claude-dist/
 
 ---
 
+## 如何更新 dkskill
+
+### 通过 `npx skills add` 安装的用户
+
+重新运行一次安装命令即可。安装和更新用的是同一条命令：
+
+```bash
+npx -y skills add FocusLiz-Lab/dkskill -g --all
+```
+
+然后重启或刷新你的 Agent 客户端，让新的 skill 配置生效。
+
+### 手动 zip 安装的用户
+
+到 GitHub Releases 下载最新版本：
+
+```text
+https://github.com/FocusLiz-Lab/dkskill/releases
+```
+
+重新导入最新的 skill zip。Trae Solo 这类一个 zip 一个 skill 的客户端，需要逐个替换旧 skill。
+
+### 本地源码用户
+
+```powershell
+git pull
+powershell -ExecutionPolicy Bypass -File .\tools\build-skills.ps1
+```
+
+---
+
 ## IMA 配置
 
 整套 Dankoe workflow skills 默认读取 IMA 知识库：
@@ -92,6 +125,12 @@ $dankoe-offer 帮我设计一个数字产品 offer
 ```
 
 如果要使用其他 IMA 知识库，在问题里直接写知识库名称即可。
+
+### 加入知识库
+
+如果你想加入或获取「Dankoe 终极版 | 深度觉醒（持续更新）」知识库，可以联系我。
+
+![加入知识库二维码](docs/knowledge-base-qrcode.png)
 
 ### 安装 IMA skill
 

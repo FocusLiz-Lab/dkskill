@@ -59,7 +59,7 @@ def main() -> None:
         skill_zips.append(out_zip)
         print(f"built {out_zip}")
 
-    bundle_name = "dankoe-claude-skills.zip" if args.claude else f"dankoe-skills-{version}.zip"
+    bundle_name = "dkskill-claude-skills.zip" if args.claude else f"dkskill-{version}.zip"
     if version or args.claude:
         bundle_path = out / bundle_name
         with zipfile.ZipFile(bundle_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
@@ -69,6 +69,9 @@ def main() -> None:
                 path = root / name
                 if path.exists():
                     archive.write(path, name)
+            docs = root / "docs"
+            if docs.exists():
+                add_tree(archive, docs, Path("docs"))
         print(f"bundle {bundle_path}")
 
 
