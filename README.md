@@ -1,8 +1,8 @@
 # dkskill
 
-Dankoe-style one-person company skill toolbox.
+Dan Koe 风格一人公司 Skill 工具箱。
 
-This repository packages a set of Agent skills for learning Dan Koe-style materials, building a one-person company, designing offers, creating content systems, writing long/short-form content, and designing AI-assisted workflows.
+本仓库打包了一组面向 Agent 的 skills，用于学习 Dan Koe 风格资料、搭建一人公司、设计 offer、创建内容系统、撰写长短内容，并设计 AI 辅助工作流。
 
 可在 Codex、Claude Code、Cursor、Trae Solo 等支持 skill / system prompt 的 Agent 上使用。
 
