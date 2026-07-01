@@ -1,25 +1,25 @@
 ---
 name: dankoe
-description: Dankoe one-person company toolkit main router with default IMA knowledge-base grounding. Use when the user asks about building a one-person company, personal brand, creator business, digital product, content engine, AI-assisted solo business, focus system, writing system, learning path through Dankoe materials, IMA-backed Dankoe knowledge retrieval, or turning interests/skills/knowledge into income. Triggers include /dankoe, Dankoe, Dan Koe, 一人公司, 个人品牌, 数字产品, 内容地图, 学习地图, IMA知识库, 从哪开始看, 写作系统, AI一人公司, and "把我自己产品化".
+description: Dankoe 一人公司 Skill 工具箱主入口。用于个人品牌、创作者商业、数字产品、内容系统、AI 辅助一人公司、专注系统、写作系统、学习路径、IMA 资料检索，以及把兴趣、技能和知识转成收入。默认使用 IMA 知识库「Dankoe 终极版 | 深度觉醒（持续更新）」，并可在 IMA 不可用时读取本地原子库。触发词包括 /dankoe、Dankoe、Dan Koe、一人公司、个人品牌、数字产品、内容地图、学习地图、IMA知识库、写作系统、AI一人公司和“把我自己产品化”。
 ---
 
-# dankoe
+# dankoe 一人公司工具箱
 
-Act as the router for the Dankoe one-person company toolkit. Do not solve the business problem in this skill. Identify the user's current bottleneck and route to the most relevant workflow.
+这是 Dankoe 一人公司工具箱的主入口。先识别用户当前卡点，再路由到最相关的 workflow；如果上下文足够，直接执行对应工作流。
 
-## Default IMA Source
+## 默认 IMA 资料源
 
-All Dankoe workflow skills default to the same IMA knowledge base:
+所有 Dankoe workflow skills 默认读取同一个 IMA 知识库：
 
 ```text
 Dankoe 终极版 | 深度觉醒（持续更新）
 ```
 
-Users do not need to say this knowledge-base name. Route normal user requests directly to the right workflow skill; that downstream skill should retrieve from IMA by default before producing the final output.
+用户不需要每次输入这个知识库名称。普通请求应直接路由到合适的 workflow skill；下游 skill 默认先检索 IMA，再输出结果。
 
-Use `$dankoe-ima` only when the user specifically wants source search, IMA troubleshooting, retrieval summaries, or a pure "find/read from IMA first" task.
+只有当用户明确要资料检索、IMA 排错、检索摘要，或纯粹要求“先从 IMA 找资料”时，才使用 `$dankoe-ima`。
 
-## Route Map
+## 路由表
 
 | User intent | Route to | Use when |
 |---|---|---|
@@ -31,13 +31,13 @@ Use `$dankoe-ima` only when the user specifically wants source search, IMA troub
 | Wants to write a specific essay, newsletter, thread, script, or posts | `$dankoe-writing` | The user has an idea, topic, note, transcript, article draft, or content angle and wants it turned into sharp writing. |
 | Wants AI workflows for a solo business | `$dankoe-ai-system` | The user asks how to use AI to research, write, build, sell, operate, learn faster, or systemize a one-person business. |
 
-## Clarify Once
+## 只澄清一次
 
-If the user says only "帮我做 Dankoe 一人公司" or is otherwise vague, ask one question:
+如果用户只说“帮我做 Dankoe 一人公司”或需求过于模糊，只问一个问题：
 
 > 你现在最想推进哪一块：IMA资料检索、学习路径、路线图、产品报价、内容增长、具体写作，还是 AI 工作流？
 
-After the answer, route immediately.
+收到回答后，立即路由到对应 workflow。
 
 ## Boundary Rules
 
