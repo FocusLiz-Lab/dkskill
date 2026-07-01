@@ -207,6 +207,29 @@ dankoe-ima
 
 ---
 
+## SkillHub 轻量包与全量原子库
+
+SkillHub 单个上传包限制小于 10MB，因此 SkillHub 压缩包是轻量包，不直接内置完整 `atoms.jsonl`。安装后如果需要本地离线兜底检索，调用：
+
+```text
+$dankoe-download-atoms
+```
+
+或在 dkskill 安装目录中运行：
+
+```powershell
+python tools/download_full_atoms.py
+```
+
+它会自动从 GitHub 下载并安装完整原子库到：
+
+```text
+知识库/原子库/atoms.jsonl
+知识库/原子库/atoms_*.jsonl
+```
+
+如果需要手动下载，也可以在 GitHub Release 中下载 `dks-local.zip`，它包含完整本地原子库。
+
 ## 知识库
 
 本仓库的 `知识库/Skill知识包/` 只包含抽象后的方法论说明，用于让 skill 在没有 IMA 的情况下仍可运行基础流程。
