@@ -72,7 +72,7 @@ Check for either of these files:
 ~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl
 ```
 
-If both are missing, call `$dankoe-download-atoms` or run this from the installed `dankoe-download-atoms` skill directory:
+GitHub installs of `dkskill` should already include the local expert atom library under `~/.agents/skills/dankoe/知识库/原子库/`. If both files are missing, treat the install as a light/partial install and call `$dankoe-download-atoms` or run this from the installed `dankoe-download-atoms` skill directory:
 
 ```powershell
 python tools/download_full_atoms.py
@@ -106,7 +106,17 @@ Use this handoff format:
 ```
 ## Dependency Auto-Bootstrap
 
-If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or the user explicitly wants local/offline retrieval, ensure the local Dankoe expert atom library exists before answering. Check `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl` or `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl`. If both are missing, call `$dankoe-download-atoms` or run `python tools/download_full_atoms.py` from the installed `dankoe-download-atoms` skill directory. Do not ask the user whether to download; do it automatically when local fallback is required.
+If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or the user explicitly wants local/offline retrieval, ensure the local Dankoe expert atom library exists before answering. GitHub installs should already include it under `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl`. Also check `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl`. If both are missing, treat this as a light/partial install and call `$dankoe-download-atoms` or run `python tools/download_full_atoms.py` from the installed `dankoe-download-atoms` skill directory. Do not ask the user whether to download; do it automatically when local fallback is required.
 
 If the request involves acquisition, traffic, channel choice, platform choice, Xiaohongshu/小红书, WeChat Official Account/公众号, private domain/私域, conversion, lead generation, product launch, business examples, benchmark projects, case studies, monetization examples, 生财有术案例, or any answer would benefit from case evidence, use `$commercial-case-library` automatically before answering. Do not ask the user whether to download it.
+## Dankoe Methodology First
+
+Every answer must use Dankoe methodology as the primary reasoning layer. For `/dankoe` requests, first ground the diagnosis, framing, and recommendation in Dankoe sources or Dankoe workflow principles:
+
+1. Prefer the default IMA knowledge base `Dankoe 终极版 | 深度觉醒（持续更新）`.
+2. If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or local fallback is needed, use the local Dankoe expert atom library and auto-bootstrap it when missing.
+3. Only after the Dankoe layer is established, add commercial cases when the question would benefit from proof, benchmarks, platform/channel examples, monetization examples, acquisition examples, or Chinese-market context.
+4. Commercial cases are supporting evidence only. Do not let commercial cases replace Dankoe methodology, and do not answer purely from the commercial case library unless no Dankoe source is available; if that happens, label the answer as case-supported inference rather than Dankoe-grounded.
+5. In final answers, keep the distinction clear: `Dankoe 方法论` for the core principle and `商业案例支撑` for examples.
+
 
