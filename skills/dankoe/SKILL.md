@@ -49,6 +49,12 @@ If it does not exist, do not continue with a generic answer. Ask the user:
 
 Only after the user agrees, route to `$commercial-case-library` and run its downloader. After the download succeeds, continue the original task. If the user declines, continue without case-library evidence and clearly say the answer will not include 商业案例库检索结果.
 
+If `$commercial-case-library` is not installed or cannot be loaded, ask the user to install it first:
+
+```text
+npx -y skills add FocusLiz-Lab/commercial-case-library -g --all
+```
+
 ## 只澄清一次
 
 如果用户只说“帮我做 Dankoe 一人公司”或需求过于模糊，只问一个问题：
