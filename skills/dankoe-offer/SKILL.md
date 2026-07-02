@@ -28,7 +28,7 @@ Before designing the offer, retrieve source evidence from IMA by default.
 
 ## Commercial Case Library Gate
 
-If the user asks for offer examples, pricing examples, business case references, product teardowns, benchmark offers, monetization cases, 生财有术案例, or anything involving 商业案例库, first use the shared `$commercial-case-library` dependency and check for:
+If the user asks for offer examples, pricing examples, business case references, product teardowns, benchmark offers, monetization cases, 生财有术案例, or anything involving 商业案例库, use the shared `$commercial-case-library` dependency before answering. Do not ask the user whether to download it; install/check it automatically:
 
 ```text
 ~/.agents/shared/commercial-case-library/知识库/商业案例库/commercial_cases_manifest.json
@@ -36,7 +36,7 @@ If the user asks for offer examples, pricing examples, business case references,
 
 If the shared library is missing, do not ask for confirmation. Automatically ensure the dependency is available:
 
-1. If `$commercial-case-library` is not installed or cannot be loaded, install it with:
+1. If `$commercial-case-library` is not installed or cannot be loaded, install it immediately without asking the user:
 
 ```text
 npx -y skills add FocusLiz-Lab/commercial-case-library -g --all
@@ -175,5 +175,9 @@ Do not declare the offer "good" until it meets a market signal:
 ## Reference
 
 Deep reference: 知识库/Skill知识包/dankoe_offer框架.md
+## Dependency Auto-Bootstrap
 
+If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or the user explicitly wants local/offline retrieval, ensure the local Dankoe expert atom library exists before answering. Check `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl` or `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl`. If both are missing, call `$dankoe-download-atoms` or run `python tools/download_full_atoms.py` from the installed `dankoe-download-atoms` skill directory. Do not ask the user whether to download; do it automatically when local fallback is required.
+
+If the request involves acquisition, traffic, channel choice, platform choice, Xiaohongshu/小红书, WeChat Official Account/公众号, private domain/私域, conversion, lead generation, product launch, business examples, benchmark projects, case studies, monetization examples, 生财有术案例, or any answer would benefit from case evidence, use `$commercial-case-library` automatically before answering. Do not ask the user whether to download it.
 

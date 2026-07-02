@@ -1,25 +1,21 @@
 #!/usr/bin/env python3
-"""Download the full atom libraries for this skill from GitHub."""
+"""Download the full atom libraries for this skill from the latest GitHub Release."""
 
 from __future__ import annotations
 
-import json
 import sys
-import urllib.parse
 import urllib.request
+import zipfile
+import tempfile
 from pathlib import Path
 
 REPO = "FocusLiz-Lab/dkskill"
-DOWNLOAD_DIRS = ("知识库/原子库",)
+ASSET_URL = f"https://github.com/{REPO}/releases/latest/download/dks-local.zip"
+INSTALL_PREFIX = "知识库/原子库/"
 
 
 def package_root() -> Path:
     return Path(__file__).resolve().parents[1]
-
-
-def fetch_json(url: str):
-    with urllib.request.urlopen(url, timeout=60) as response:
-        return json.loads(response.read().decode("utf-8"))
 
 
 def download(url: str, target: Path) -> None:
@@ -28,34 +24,46 @@ def download(url: str, target: Path) -> None:
         target.write_bytes(response.read())
 
 
-def download_dir(remote_dir: str) -> int:
-    encoded_dir = urllib.parse.quote(remote_dir)
-    api_url = f"https://api.github.com/repos/{REPO}/contents/{encoded_dir}?ref=main"
-    files = [item for item in fetch_json(api_url) if item.get("type") == "file"]
-    if not files:
-        print(f"未在 GitHub 仓库中找到 {remote_dir} 文件。", file=sys.stderr)
-        return 0
+def normalize_member(name: str) -> str:
+    normalized = name.replace("\\", "/")
+    return normalized.split("/", 1)[1] if normalized.startswith("dks/") else normalized
 
-    target_dir = package_root() / remote_dir
+
+def install_from_zip(zip_path: Path) -> int:
     count = 0
-    for item in files:
-        name = item["name"]
-        if not (name.endswith(".jsonl") or name.endswith(".json") or name.endswith(".md")):
-            continue
-        print(f"下载 {remote_dir}/{name} ...")
-        download(item["download_url"], target_dir / name)
-        count += 1
+    root = package_root()
+    with zipfile.ZipFile(zip_path) as archive:
+        for member in archive.infolist():
+            relative = normalize_member(member.filename)
+            if member.is_dir() or not relative.startswith(INSTALL_PREFIX):
+                continue
+            if not (relative.endswith(".jsonl") or relative.endswith(".json") or relative.endswith(".md")):
+                continue
+            target = root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(archive.read(member))
+            count += 1
+
+            # Also mirror atoms to the sibling main skill when installed as separate skills.
+            sibling_root = root.parent / "dankoe"
+            if sibling_root.exists():
+                sibling_target = sibling_root / relative
+                sibling_target.parent.mkdir(parents=True, exist_ok=True)
+                sibling_target.write_bytes(archive.read(member))
     return count
 
 
 def main() -> int:
-    count = 0
-    for remote_dir in DOWNLOAD_DIRS:
-        count += download_dir(remote_dir)
+    with tempfile.TemporaryDirectory() as tmp:
+        zip_path = Path(tmp) / "dks-local.zip"
+        print(f"下载 {ASSET_URL} ...")
+        download(ASSET_URL, zip_path)
+        count = install_from_zip(zip_path)
+
     if count == 0:
         print("未下载到任何原子库文件。", file=sys.stderr)
         return 1
-    print(f"完成：已下载 {count} 个文件到 {package_root() / '知识库'}")
+    print(f"完成：已安装 {count} 个文件到 {package_root() / '知识库'}")
     return 0
 
 

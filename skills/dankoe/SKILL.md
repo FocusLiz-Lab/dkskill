@@ -33,7 +33,9 @@ Dankoe 终极版 | 深度觉醒（持续更新）
 
 ## Commercial Case Library Gate
 
-If the user's request needs commercial cases, business examples, benchmark projects, case studies, teardown examples, market examples, monetization examples, 生财有术案例, or asks to "找案例/拆案例/参考案例/对标/商业案例库", treat the commercial case atom library as a required dependency.
+If the user's request needs commercial cases, business examples, benchmark projects, case studies, teardown examples, market examples, monetization examples, 生财有术案例, or asks to "找案例/拆案例/参考案例/对标/商业案例库", treat the commercial case atom library as a required dependency. Do not ask the user whether to download it; install/check it automatically.
+
+Additional trigger rule: if the user asks about acquisition, traffic, channel choice, platform choice, Xiaohongshu/小红书, WeChat Official Account/公众号, private domain/私域, conversion, lead generation, product launch, or which platform to publish on, assume case evidence would improve the answer. Use `$commercial-case-library` automatically before answering, without asking the user whether to download it.
 
 Before answering or routing, use the shared `$commercial-case-library` dependency. Check whether this shared file exists:
 
@@ -43,7 +45,7 @@ Before answering or routing, use the shared `$commercial-case-library` dependenc
 
 If the shared library is missing, do not ask for confirmation. Automatically ensure the dependency is available:
 
-1. If `$commercial-case-library` is not installed or cannot be loaded, install it with:
+1. If `$commercial-case-library` is not installed or cannot be loaded, install it immediately without asking the user:
 
 ```text
 npx -y skills add FocusLiz-Lab/commercial-case-library -g --all
@@ -58,6 +60,25 @@ python scripts/download_cases.py
 3. Continue the original task after the download succeeds.
 
 Only stop and ask the user for help if installation, network access, or filesystem writes fail. If that happens, explain the failure and give the exact command the user can run manually.
+
+## Local Atom Bootstrap
+
+For source-grounded Dankoe answers, prefer IMA first. If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or the user explicitly wants local/offline retrieval, ensure the local expert atom library is available before answering.
+
+Check for either of these files:
+
+```text
+~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl
+~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl
+```
+
+If both are missing, call `$dankoe-download-atoms` or run this from the installed `dankoe-download-atoms` skill directory:
+
+```powershell
+python tools/download_full_atoms.py
+```
+
+Do not ask the user whether to download the expert atom library. Download automatically when it is required for local fallback. Only stop if installation, network access, or filesystem writes fail.
 
 ## 只澄清一次
 
@@ -83,5 +104,9 @@ Use this handoff format:
 原因：{one sentence}
 需要输入：{what the user should provide next}
 ```
+## Dependency Auto-Bootstrap
 
+If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or the user explicitly wants local/offline retrieval, ensure the local Dankoe expert atom library exists before answering. Check `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl` or `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl`. If both are missing, call `$dankoe-download-atoms` or run `python tools/download_full_atoms.py` from the installed `dankoe-download-atoms` skill directory. Do not ask the user whether to download; do it automatically when local fallback is required.
+
+If the request involves acquisition, traffic, channel choice, platform choice, Xiaohongshu/小红书, WeChat Official Account/公众号, private domain/私域, conversion, lead generation, product launch, business examples, benchmark projects, case studies, monetization examples, 生财有术案例, or any answer would benefit from case evidence, use `$commercial-case-library` automatically before answering. Do not ask the user whether to download it.
 
