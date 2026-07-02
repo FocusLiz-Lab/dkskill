@@ -28,6 +28,22 @@ Before producing the roadmap, retrieve source evidence from IMA by default.
 - If IMA is unavailable, credentials are missing, or access fails, state that limitation and continue from the bundled abstract reference.
 - Never expose `knowledge_base_id`, `media_id`, `folder_id`, or credentials.
 
+## Commercial Case Library Gate
+
+If the user asks for roadmap examples, business examples, benchmark projects, similar case studies, niche examples, monetization examples, 生财有术案例, or anything involving 商业案例库, first use the shared `$commercial-case-library` dependency and check for:
+
+```text
+~/.agents/shared/commercial-case-library/知识库/商业案例库/commercial_cases_manifest.json
+```
+
+If missing, pause and ask:
+
+```text
+这个路线图任务需要商业案例库，但本地共享案例库还没有下载。是否现在下载？下载一次后 dkskill、lhskill、openskill 都可以共用。
+```
+
+If the user agrees, route to `$commercial-case-library` and run its downloader, then continue. If the user declines, continue with Dankoe roadmap principles only and clearly state no commercial-case retrieval was used.
+
 ## Intake
 
 Ask for missing information only once. Prefer this compact intake:
@@ -130,3 +146,4 @@ Always end with 3 to 5 concrete actions for the next 7 days. Each action must pr
 ## Reference
 
 Deep reference: 知识库/Skill知识包/dankoe_一人公司框架.md
+

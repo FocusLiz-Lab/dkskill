@@ -10,7 +10,7 @@ import urllib.request
 from pathlib import Path
 
 REPO = "FocusLiz-Lab/dkskill"
-DOWNLOAD_DIRS = ("知识库/原子库", "知识库/商业案例库")
+DOWNLOAD_DIRS = ("知识库/原子库",)
 
 
 def package_root() -> Path:

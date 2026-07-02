@@ -28,6 +28,22 @@ Before building the content map, retrieve source evidence from IMA by default.
 - If IMA is unavailable, credentials are missing, or access fails, state that limitation and continue from the bundled abstract reference.
 - Never expose `knowledge_base_id`, `media_id`, `folder_id`, or credentials.
 
+## Commercial Case Library Gate
+
+If the user asks for case-backed content ideas, business examples, benchmark accounts/products, teardown angles, proof posts based on real projects, 生财有术案例, or any use of the 商业案例库, first use the shared `$commercial-case-library` dependency and check for:
+
+```text
+~/.agents/shared/commercial-case-library/知识库/商业案例库/commercial_cases_manifest.json
+```
+
+If missing, pause and ask:
+
+```text
+这个内容任务需要商业案例库，但本地共享案例库还没有下载。是否现在下载？下载一次后 dkskill、lhskill、openskill 都可以共用。
+```
+
+If the user agrees, route to `$commercial-case-library` and run its downloader, then continue. Do not invent case examples while the library is missing. If the user declines, proceed only with general Dankoe content principles and state that no commercial-case retrieval was used.
+
 ## Intake
 
 Ask for missing information:
@@ -145,3 +161,4 @@ Output:
 ## Reference
 
 Deep reference: 知识库/Skill知识包/dankoe_内容地图.md
+

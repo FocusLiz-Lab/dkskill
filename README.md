@@ -221,25 +221,35 @@ $dankoe-download-atoms
 python tools/download_full_atoms.py
 ```
 
-它会自动从 GitHub 下载并安装完整专家原子库和商业案例原子库到：
+它会自动从 GitHub 下载并安装完整专家原子库到：
 
 ```text
 知识库/原子库/atoms.jsonl
 知识库/原子库/atoms_*.jsonl
-知识库/商业案例库/atoms.jsonl
-知识库/商业案例库/atoms_*.jsonl
 ```
 
-如果需要手动下载，也可以在 GitHub Release 中下载 `dks-local.zip`，它包含完整本地专家原子库和商业案例库。
+商业案例库已抽离为共享依赖，统一使用：
+
+```text
+$commercial-case-library
+```
+
+共享下载位置：
+
+```text
+~/.agents/shared/commercial-case-library/知识库/商业案例库/
+```
+
+这样 dkskill、lhskill、openskill 等多个 skill 可以共用同一份商业案例库，避免重复下载。
 
 ## 知识库
 
 本仓库的 `知识库/Skill知识包/` 只包含抽象后的方法论说明，用于让 skill 在没有 IMA 的情况下仍可运行基础流程。
 
-本仓库同时包含中文商业案例原子库：
+商业案例库不再内置在 dkskill 中。需要案例、项目拆解、对标案例、变现案例或生财有术案例时，先检查共享库：
 
 ```text
-知识库/商业案例库/atoms.jsonl
+~/.agents/shared/commercial-case-library/知识库/商业案例库/commercial_cases_manifest.json
 ```
 
 ```text

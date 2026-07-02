@@ -31,6 +31,24 @@ Dankoe 终极版 | 深度觉醒（持续更新）
 | Wants to write a specific essay, newsletter, thread, script, or posts | `$dankoe-writing` | The user has an idea, topic, note, transcript, article draft, or content angle and wants it turned into sharp writing. |
 | Wants AI workflows for a solo business | `$dankoe-ai-system` | The user asks how to use AI to research, write, build, sell, operate, learn faster, or systemize a one-person business. |
 
+## Commercial Case Library Gate
+
+If the user's request needs commercial cases, business examples, benchmark projects, case studies, teardown examples, market examples, monetization examples, 生财有术案例, or asks to "找案例/拆案例/参考案例/对标/商业案例库", treat the commercial case atom library as a required dependency.
+
+Before answering or routing, use the shared `$commercial-case-library` dependency. Check whether this shared file exists:
+
+```text
+~/.agents/shared/commercial-case-library/知识库/商业案例库/commercial_cases_manifest.json
+```
+
+If it does not exist, do not continue with a generic answer. Ask the user:
+
+```text
+这个问题需要使用商业案例库，但本地共享案例库还没有下载。是否现在下载？下载一次后 dkskill、lhskill、openskill 都可以共用。
+```
+
+Only after the user agrees, route to `$commercial-case-library` and run its downloader. After the download succeeds, continue the original task. If the user declines, continue without case-library evidence and clearly say the answer will not include 商业案例库检索结果.
+
 ## 只澄清一次
 
 如果用户只说“帮我做 Dankoe 一人公司”或需求过于模糊，只问一个问题：
@@ -55,3 +73,4 @@ Use this handoff format:
 原因：{one sentence}
 需要输入：{what the user should provide next}
 ```
+

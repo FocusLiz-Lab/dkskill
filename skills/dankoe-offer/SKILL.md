@@ -26,6 +26,22 @@ Before designing the offer, retrieve source evidence from IMA by default.
 - If IMA is unavailable, credentials are missing, or access fails, state that limitation and continue from the bundled abstract reference.
 - Never expose `knowledge_base_id`, `media_id`, `folder_id`, or credentials.
 
+## Commercial Case Library Gate
+
+If the user asks for offer examples, pricing examples, business case references, product teardowns, benchmark offers, monetization cases, 生财有术案例, or anything involving 商业案例库, first use the shared `$commercial-case-library` dependency and check for:
+
+```text
+~/.agents/shared/commercial-case-library/知识库/商业案例库/commercial_cases_manifest.json
+```
+
+If missing, pause and ask:
+
+```text
+这个 offer 任务需要商业案例库，但本地共享案例库还没有下载。是否现在下载？下载一次后 dkskill、lhskill、openskill 都可以共用。
+```
+
+If the user agrees, route to `$commercial-case-library` and run its downloader, then continue. Do not fabricate case proof. If the user declines, continue with framework-only offer design and explicitly say no commercial-case retrieval was used.
+
 ## Intake
 
 Collect only what is missing:
@@ -149,3 +165,4 @@ Do not declare the offer "good" until it meets a market signal:
 ## Reference
 
 Deep reference: 知识库/Skill知识包/dankoe_offer框架.md
+
