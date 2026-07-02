@@ -1,6 +1,6 @@
 # dkskill
 
-Dan Koe 风格一人公司 Skill 工具箱。
+Dan Koe 一人公司 Skill 工具箱。
 
 本仓库打包了一组面向 Agent 的 skills，用于学习 Dan Koe 风格资料、搭建一人公司、设计 offer、创建内容系统、撰写长短内容，并设计 AI 辅助工作流。
 
@@ -246,7 +246,7 @@ $commercial-case-library
 
 本仓库的 `知识库/Skill知识包/` 只包含抽象后的方法论说明，用于让 skill 在没有 IMA 的情况下仍可运行基础流程。
 
-商业案例库不再内置在 dkskill 中。需要案例、项目拆解、对标案例、变现案例或生财有术案例时，先检查共享库：
+商业案例库不再内置在 dkskill 中。需要案例、项目拆解、对标案例、变现案例，先检查共享库：
 
 ```text
 ~/.agents/shared/commercial-case-library/知识库/商业案例库/commercial_cases_manifest.json
