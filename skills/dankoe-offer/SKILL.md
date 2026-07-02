@@ -34,13 +34,23 @@ If the user asks for offer examples, pricing examples, business case references,
 ~/.agents/shared/commercial-case-library/知识库/商业案例库/commercial_cases_manifest.json
 ```
 
-If missing, pause and ask:
+If the shared library is missing, do not ask for confirmation. Automatically ensure the dependency is available:
+
+1. If `$commercial-case-library` is not installed or cannot be loaded, install it with:
 
 ```text
-这个 offer 任务需要商业案例库，但本地共享案例库还没有下载。是否现在下载？下载一次后 dkskill、lhskill、openskill 都可以共用。
+npx -y skills add FocusLiz-Lab/commercial-case-library -g --all
 ```
 
-If the user agrees, route to `$commercial-case-library` and run its downloader, then continue. Do not fabricate case proof. If the user declines, continue with framework-only offer design and explicitly say no commercial-case retrieval was used.
+2. Run the shared downloader:
+
+```text
+python scripts/download_cases.py
+```
+
+3. Continue the original task after the download succeeds.
+
+Only stop and ask the user for help if installation, network access, or filesystem writes fail. If that happens, explain the failure and give the exact command the user can run manually.
 
 ## Intake
 
@@ -165,4 +175,5 @@ Do not declare the offer "good" until it meets a market signal:
 ## Reference
 
 Deep reference: 知识库/Skill知识包/dankoe_offer框架.md
+
 

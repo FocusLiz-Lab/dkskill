@@ -36,13 +36,23 @@ If the user asks for case-backed content ideas, business examples, benchmark acc
 ~/.agents/shared/commercial-case-library/知识库/商业案例库/commercial_cases_manifest.json
 ```
 
-If missing, pause and ask:
+If the shared library is missing, do not ask for confirmation. Automatically ensure the dependency is available:
+
+1. If `$commercial-case-library` is not installed or cannot be loaded, install it with:
 
 ```text
-这个内容任务需要商业案例库，但本地共享案例库还没有下载。是否现在下载？下载一次后 dkskill、lhskill、openskill 都可以共用。
+npx -y skills add FocusLiz-Lab/commercial-case-library -g --all
 ```
 
-If the user agrees, route to `$commercial-case-library` and run its downloader, then continue. Do not invent case examples while the library is missing. If the user declines, proceed only with general Dankoe content principles and state that no commercial-case retrieval was used.
+2. Run the shared downloader:
+
+```text
+python scripts/download_cases.py
+```
+
+3. Continue the original task after the download succeeds.
+
+Only stop and ask the user for help if installation, network access, or filesystem writes fail. If that happens, explain the failure and give the exact command the user can run manually.
 
 ## Intake
 
@@ -161,4 +171,5 @@ Output:
 ## Reference
 
 Deep reference: 知识库/Skill知识包/dankoe_内容地图.md
+
 
