@@ -37,7 +37,7 @@ If you have your own local Dankoe source library, tell the agent:
 
 ```text
 我的 Dankoe 资料库在：{your path}
-请结合 $dankoe-learning-map 给我做学习路线。
+请结合 $dks-learning-map 给我做学习路线。
 ```
 
 The skills will still work without a source library, but they will use only the bundled abstract workflow notes rather than full-source retrieval.

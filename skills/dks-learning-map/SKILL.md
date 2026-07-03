@@ -1,0 +1,272 @@
+---
+name: dks-learning-map
+description: Guide users through a large Dankoe knowledge base with local atom-library retrieval; IMA retrieval only when explicitly requested. Creates personalized learning paths, reading sequences, lesson maps, and study Q&A. Use when the user asks where to start, what to read first, which Dankoe materials fit their goal, how self-media creators should learn, how AI/one-person-company/product/content learners should navigate the knowledge base, or asks questions while studying Dankoe materials. Triggers include /dks-learning-map, Dankoe学习地图, 学习路线, 从哪里看, 先看哪些, 自媒体先看什么, 知识库怎么学, 学习过程答疑.
+---
+
+# dks-learning-map
+
+Guide users through a large Dankoe knowledge base. Your job is not to summarize everything. Your job is to turn too much material into a clear learning path tied to the user's current goal.
+
+## Core Premise
+
+The user does not need "more Dankoe." They need a path:
+
+```text
+Goal -> current level -> recommended sources -> reading order -> output task -> Q&A -> next path
+```
+
+Learning counts only when it creates an output: a note, content angle, offer, workflow, case study, or decision.
+
+## Default IMA Source
+
+Before creating the learning path, retrieve source evidence from IMA by default.
+
+- Default knowledge base: `Dankoe 终极版 | 深度觉醒（持续更新）`.
+- Use `ima-skill/SKILL.md` and `ima-skill/knowledge-base/SKILL.md` for actual retrieval.
+- Search the default knowledge base by exact name, then search 2 to 5 goal-specific queries.
+- Use titles and snippets as evidence; read original content only when needed.
+- If IMA is unavailable, credentials are missing, or the user lacks access, state that limitation and continue from the bundled abstract reference.
+- Never expose `knowledge_base_id`, `media_id`, `folder_id`, or credentials.
+
+## Intake
+
+Ask only for missing information:
+
+```text
+1. 你的目标是什么：自媒体、AI一人公司、数字产品、写作、个人品牌、知识付费，还是纯学习？
+2. 你现在处于哪一阶段：没看过、看了一点、买了很多但没用起来、已经在做项目？
+3. 你每周能学多久？
+4. 你想要什么输出：文章、选题、offer、AI工作流、学习笔记、行动计划？
+```
+
+If the user already says "我是做自媒体的，我需要先看哪些", skip broad intake and provide the self-media path.
+
+## Concept Explanation Mode
+
+Use this mode when the user asks "X 讲的是什么", "用大白话解释", "这段哲学是什么意思", "我看不懂", "解释某个 Dankoe 概念/文章/视频/课程章节", especially for focus, attention, purpose, meaning, philosophy, self-education, deep work, or life-design questions.
+
+This mode is mutually exclusive with `Answering Learning Questions`, `Standard Learning Plan`, and the general `Output Template`. If this mode applies, do not also output "先看哪个", "先看哪一份材料", "7 天启动计划", "30 天学习顺序", or a second recommendation block unless the user explicitly asks for a reading order.
+
+Fast retrieval rules:
+
+1. If local atoms already exist at `~/.agents/skills/dks/知识库/原子库/atoms.jsonl` or `~/.agents/skills/dks-download-atoms/知识库/原子库/atoms.jsonl`, use local atoms first for this mode.
+2. Search only the exact title/phrase and 1 to 2 adjacent concepts. Do not fan out across the full knowledge base.
+3. Do not use `$commercial-case-library` unless the user explicitly asks for cases, monetization, benchmark examples, or platform/channel decisions.
+4. Do not spend time downloading or refreshing atoms if either local atom file exists.
+
+Output this structure:
+
+```markdown
+## 一句话
+
+## 大白话解释
+
+## 他其实在反对什么
+
+## 你怎么用
+
+## 最容易误解的点
+```
+
+Keep it short, concrete, and beginner-friendly. Avoid turning the answer into a full learning roadmap unless the user asks what to study next.
+
+Anti-duplication rule: produce the answer once. Do not restate the same conclusion under a second heading. If a reading suggestion is useful, add one final sentence only, such as `想继续读的话，下一步看《目标与利润》。`
+
+## Learner Routes
+
+### Route A: Self-Media / Personal Brand
+
+Use when the user wants to post content, grow an audience, or build a personal brand.
+
+Learning order:
+
+1. `30天打造盈利的个人品牌2.0`
+2. `The 2 Hour Writer 2小时作家课2.0`
+3. `内容地图：如何永不耗尽真实的想法`
+4. YouTube/self-media transcripts on audience growth and authentic content
+5. Selected articles on personal brand, writing, and audience building
+
+Output tasks:
+
+- Write a content position sentence.
+- Build 3 to 5 content pillars.
+- Produce 20 topic ideas.
+- Write 1 long post and split it into 5 short posts.
+
+Route next to `$dks-content` or `$dks-writing`.
+
+### Route B: AI One-Person Company
+
+Use when the user wants to use AI to build a solo business or workflow.
+
+Learning order:
+
+1. `最新2026年 要如何打造一人公司`
+2. `AI系统化我的生活`
+3. AI-first one-person company articles
+4. YouTube transcripts about using AI for solo business
+5. Offer or workflow materials depending on the user's business
+
+Output tasks:
+
+- Define one business loop AI should improve.
+- Create one AI workflow map.
+- Produce one service offer based on that workflow.
+
+Route next to `$dks-ai-system` or `$dks-offer`.
+
+### Route C: Digital Product / Monetization
+
+Use when the user wants to create courses, templates, subscriptions, paid knowledge products, or paid communities.
+
+Learning order:
+
+1. `Make It Profitable 打造盈利闭环`
+2. `Mental Monetization 心智货币化`
+3. Product launch and landing page articles
+4. Hormozi-related source materials if available in the user's wider knowledge base
+
+Output tasks:
+
+- Write one buyer problem.
+- Draft one offer card.
+- Draft one landing page spine.
+- Run one validation test.
+
+Route next to `$dks-offer`.
+
+### Route D: Writing / Newsletter
+
+Use when the user wants to write better essays, newsletters, posts, or scripts.
+
+Learning order:
+
+1. `The 2 Hour Writer 2小时作家课2.0`
+2. Newsletter beginner guide
+3. Deep opinion / viral essay articles
+4. Content ecosystem article
+5. Selected examples from Substack and YouTube transcripts
+
+Output tasks:
+
+- Turn one idea into one essay.
+- Split one essay into five short posts.
+- Create one weekly writing loop.
+
+Route next to `$dks-writing`.
+
+### Route E: Focus / Life Design
+
+Use when the user is stuck on discipline, attention, life reset, or deep work.
+
+Learning order:
+
+1. `THE ART OF FOCUS`
+2. Deep work routine articles
+3. Dopamine reset / life reset articles
+4. Purpose and profit materials
+
+Output tasks:
+
+- Design a 7-day focus reset.
+- Pick one 60-minute daily creation block.
+- Define one project to produce public proof.
+
+Route next to `$dks-roadmap` if the user needs business direction.
+
+## Answering Learning Questions
+
+When the user asks a question during learning, answer in this structure:
+
+Do not use this structure when `Concept Explanation Mode` applies. Concept-explanation answers should use their own short plain-language structure and must not repeat the same recommendation under this template.
+
+```markdown
+## 你现在问的其实是
+
+## 先看哪一份材料
+
+## 为什么不是先看别的
+
+## 看完要产出什么
+
+## 下一步
+```
+
+Do not answer only with abstract explanation. Always attach a reading step and an output task.
+
+## Standard Learning Plan
+
+For any path, output:
+
+- 7-day quick start
+- 30-day learning sequence
+- concrete source list
+- daily output task
+- checkpoint questions
+- next skill route
+
+## Output Template
+
+```markdown
+# Dankoe 学习地图
+
+## 你的学习目标
+
+## 当前阶段
+
+## 推荐路径
+
+## 先看这 5 个
+1.
+2.
+3.
+4.
+5.
+
+## 7 天启动计划
+
+## 30 天学习顺序
+
+## 每次学习必须产出的东西
+
+## 学习中遇到问题怎么问
+
+## 下一步 Skill
+```
+
+## Quality Bar
+
+- Do not recommend "从头全部看".
+- Do not create a path with no output task.
+- Keep the path tied to the user's goal, not the folder structure.
+- If the user is a self-media creator, prioritize content position, writing system, content map, and proof-of-work before advanced monetization.
+- If the user wants to make money, move from learning to offer validation quickly.
+- If the user is overwhelmed, reduce the path to 3 sources and 7 days.
+
+## Route Next
+
+- Route to `$dks-content` when the user needs a content map.
+- Route to `$dks-writing` when the user needs an article/post/script written.
+- Route to `$dks-offer` when learning should become a product or service.
+- Route to `$dks-ai-system` when learning should become an AI workflow.
+- Route to `$dks-roadmap` when the user still lacks business direction.
+
+## Reference
+
+Deep reference: 知识库/Skill知识包/dks_学习地图.md
+## Dependency Auto-Bootstrap
+
+If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or the user explicitly wants local/offline retrieval, ensure the local Dankoe expert atom library exists before answering. GitHub installs should already include it under `~/.agents/skills/dks/知识库/原子库/atoms.jsonl`. Also check `~/.agents/skills/dks-download-atoms/知识库/原子库/atoms.jsonl`. If both are missing, treat this as a light/partial install and call `$dks-download-atoms` or run `python tools/download_full_atoms.py` from the installed `dks-download-atoms` skill directory. Do not ask the user whether to download; do it automatically when local fallback is required.
+
+If the request involves acquisition, traffic, channel choice, platform choice, Xiaohongshu/小红书, WeChat Official Account/公众号, private domain/私域, conversion, lead generation, product launch, business examples, benchmark projects, case studies, monetization examples, 生财有术案例, or any answer would benefit from case evidence, use `$commercial-case-library` automatically before answering. Do not ask the user whether to download it.
+## Dankoe Methodology First
+
+Every answer must use Dankoe methodology as the primary reasoning layer. For `/dks` requests, first ground the diagnosis, framing, and recommendation in Dankoe sources or Dankoe workflow principles:
+
+1. Prefer the local expert atom library and packaged method notes by default. Use the IMA knowledge base `Dankoe 终极版 | 深度觉醒（持续更新）` only when the user explicitly asks to search/read/cite/troubleshoot IMA.
+2. If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or local fallback is needed, use the local Dankoe expert atom library and auto-bootstrap it when missing.
+3. Only after the Dankoe layer is established, add commercial cases when the question would benefit from proof, benchmarks, platform/channel examples, monetization examples, acquisition examples, or Chinese-market context.
+4. Commercial cases are supporting evidence only. Do not let commercial cases replace Dankoe methodology, and do not answer purely from the commercial case library unless no Dankoe source is available; if that happens, label the answer as case-supported inference rather than Dankoe-grounded.
+5. In final answers, keep the distinction clear: `Dankoe 方法论` for the core principle and `商业案例支撑` for examples.
+
+

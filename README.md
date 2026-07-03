@@ -10,7 +10,7 @@ Dan Koe 一人公司 Skill 工具箱。
 
 **v0.3.6 更新**：项目更名为 `dkskill`，GitHub 仓库同步更名。README 新增更新方式和知识库加入说明。
 
-**v0.3.5 更新**：整套 Dankoe workflow skills 默认使用 IMA 知识库「Dankoe 终极版 | 深度觉醒（持续更新）」作为资料来源。用户不需要单独调用 `$dankoe-ima`；`$dankoe-content`、`$dankoe-writing`、`$dankoe-learning-map` 等原有 skill 会默认先检索 IMA，再输出工作流结果。
+**v0.3.5 更新**：整套 Dankoe workflow skills 普通请求默认使用本地专家原子库；显式 IMA 请求时才使用 IMA 知识库「Dankoe 终极版 | 深度觉醒（持续更新）」作为资料来源。用户需要显式调用 `$dks-ima` 或明确要求 IMA 检索时才会使用 IMA；`$dks-content`、`$dks-writing`、`$dks-learning-map` 等原有 skill 普通请求默认使用本地原子库，只有显式 IMA 请求才检索 IMA。
 
 ---
 
@@ -25,15 +25,15 @@ npx -y skills add FocusLiz-Lab/dkskill -g --all
 安装后可以直接使用：
 
 ```text
-$dankoe-content 我是做自媒体的，帮我做内容地图
+$dks-content 我是做自媒体的，帮我做内容地图
 ```
 
 ```text
-$dankoe-writing 帮我把“普通人如何建立个人品牌”扩展成一篇公众号文章，再拆成5条短内容
+$dks-writing 帮我把“普通人如何建立个人品牌”扩展成一篇公众号文章，再拆成5条短内容
 ```
 
 ```text
-$dankoe-offer 帮我把个人成长陪跑设计成可卖的offer
+$dks-offer 帮我把个人成长陪跑设计成可卖的offer
 ```
 
 ### Trae Solo / 手动上传
@@ -43,13 +43,13 @@ $dankoe-offer 帮我把个人成长陪跑设计成可卖的offer
 解压后里面是多个独立 skill zip：
 
 - `dankoe.zip`
-- `dankoe-learning-map.zip`
-- `dankoe-roadmap.zip`
-- `dankoe-offer.zip`
-- `dankoe-content.zip`
-- `dankoe-writing.zip`
-- `dankoe-ai-system.zip`
-- `dankoe-ima.zip`
+- `dks-learning-map.zip`
+- `dks-roadmap.zip`
+- `dks-offer.zip`
+- `dks-content.zip`
+- `dks-writing.zip`
+- `dks-ai-system.zip`
+- `dks-ima.zip`
 
 每个 zip 解压后根级都是 `SKILL.md`，可以逐个上传到支持 skill 的客户端。
 
@@ -109,19 +109,19 @@ powershell -ExecutionPolicy Bypass -File .\tools\build-skills.ps1
 
 ## IMA 配置
 
-整套 Dankoe workflow skills 默认读取 IMA 知识库：
+普通 Dankoe workflow 默认使用本地专家原子库和 Skill 知识包；只有显式 IMA 请求时才读取 IMA 知识库：
 
 ```text
 Dankoe 终极版 | 深度觉醒（持续更新）
 ```
 
-用户不需要在每次提问时写这个知识库名。只要 IMA skill 和凭证配置完成，下面这些命令都会默认先检索 IMA：
+用户不需要在每次提问时写这个知识库名。只要 IMA skill 和凭证配置完成，下面这些命令都会只有显式 IMA 请求才检索 IMA：
 
 ```text
-$dankoe-learning-map 我是做自媒体的，先看哪些？
-$dankoe-content 我是做自媒体的，帮我做内容地图
-$dankoe-writing 帮我写一篇关于个人品牌的公众号文章
-$dankoe-offer 帮我设计一个数字产品 offer
+$dks-learning-map 我是做自媒体的，先看哪些？
+$dks-content 我是做自媒体的，帮我做内容地图
+$dks-writing 帮我写一篇关于个人品牌的公众号文章
+$dks-offer 帮我设计一个数字产品 offer
 ```
 
 如果要使用其他 IMA 知识库，在问题里直接写知识库名称即可。
@@ -154,14 +154,14 @@ API Key 获取：https://ima.qq.com/agent-interface
 
 | Skill | 做什么 |
 |---|---|
-| `$dankoe` | 主入口。根据用户问题自动路由到合适的 Dankoe workflow。 |
-| `$dankoe-learning-map` | 学习地图。回答“先看哪些、从哪里开始、不同目标怎么学”。 |
-| `$dankoe-roadmap` | 一人公司路线图。把兴趣、技能、问题、受众、offer 串成 90 天路径。 |
-| `$dankoe-offer` | Offer 设计。把技能、知识、服务、课程、模板、社群设计成可卖产品。 |
-| `$dankoe-content` | 内容地图。设计个人品牌定位、内容支柱、选题系统和 30 天发布计划。 |
-| `$dankoe-writing` | 写作系统。把想法、笔记、材料扩展成长文，并拆成短内容。 |
-| `$dankoe-ai-system` | AI 工作流。为一人公司设计研究、内容、offer、交付、复盘等工作流。 |
-| `$dankoe-ima` | 可选 IMA 检索入口。用于显式搜索、排错、查看检索摘要。普通 workflow 不需要单独调用它。 |
+| `$dks` | 主入口。根据用户问题自动路由到合适的 Dankoe workflow。 |
+| `$dks-learning-map` | 学习地图。回答“先看哪些、从哪里开始、不同目标怎么学”。 |
+| `$dks-roadmap` | 一人公司路线图。把兴趣、技能、问题、受众、offer 串成 90 天路径。 |
+| `$dks-offer` | Offer 设计。把技能、知识、服务、课程、模板、社群设计成可卖产品。 |
+| `$dks-content` | 内容地图。设计个人品牌定位、内容支柱、选题系统和 30 天发布计划。 |
+| `$dks-writing` | 写作系统。把想法、笔记、材料扩展成长文，并拆成短内容。 |
+| `$dks-ai-system` | AI 工作流。为一人公司设计研究、内容、offer、交付、复盘等工作流。 |
+| `$dks-ima` | 可选 IMA 检索入口。用于显式搜索、排错、查看检索摘要。普通 workflow 不需要单独调用它。 |
 
 ---
 
@@ -170,37 +170,37 @@ API Key 获取：https://ima.qq.com/agent-interface
 ### 自媒体学习路径
 
 ```text
-dankoe-learning-map
+dks-learning-map
     ↓
-dankoe-content
+dks-content
     ↓
-dankoe-writing
+dks-writing
 ```
 
 ### 一人公司路径
 
 ```text
-dankoe-roadmap
+dks-roadmap
     ↓
-dankoe-offer
+dks-offer
     ↓
-dankoe-content
+dks-content
 ```
 
 ### 写作与内容复用
 
 ```text
-dankoe-content
+dks-content
     ↓
-dankoe-writing
+dks-writing
     ↓
-dankoe-ai-system
+dks-ai-system
 ```
 
 ### 显式 IMA 检索
 
 ```text
-dankoe-ima
+dks-ima
     ↓
 对应 workflow skill
 ```
@@ -212,7 +212,7 @@ dankoe-ima
 SkillHub 单个上传包限制小于 10MB，因此 SkillHub 压缩包是轻量包，不直接内置完整 `atoms.jsonl`。安装后如果需要本地离线兜底检索，调用：
 
 ```text
-$dankoe-download-atoms
+$dks-download-atoms
 ```
 
 或在 dkskill 安装目录中运行：

@@ -1,8 +1,8 @@
-# Dankoe 默认 IMA 检索方法
+# Dankoe 显式 IMA 检索方法
 
 ## 定位
 
-IMA 是资料库和检索层。Dankoe skills 是方法论和工作流层。整套 Dankoe skills 默认使用同一个 IMA 知识库作为资料来源；`dankoe-ima` 只是显式检索、排错或桥接说明入口。
+IMA 是资料库和检索层。Dankoe skills 是方法论和工作流层。整套 Dankoe skills 默认使用本地原子库和 Skill 知识包；只有用户主动调用 `dks-ima`，或明确要求检索、引用、排查 IMA 时，才使用 IMA 知识库。
 
 组合方式：
 
@@ -10,7 +10,7 @@ IMA 是资料库和检索层。Dankoe skills 是方法论和工作流层。整�
 IMA search/read -> evidence summary -> Dankoe workflow -> final output
 ```
 
-不要让 Dankoe skills 假装拥有完整资料。需要 Dankoe 原始资料时，默认先用 IMA 检索；IMA 不可用时才退回本仓库抽象知识包。
+不要让 Dankoe skills 假装拥有完整资料。普通 workflow 默认使用本地原子库和本仓库抽象知识包；只有显式 IMA 请求才使用 IMA 检索。
 
 ## 默认知识库
 
@@ -40,12 +40,12 @@ API Key 获取：https://ima.qq.com/agent-interface
 
 ## 路由规则
 
-- 从哪里开始学、先看哪些、学习答疑 -> `dankoe-learning-map`
-- 写公众号、朋友圈、小红书、Newsletter、脚本 -> `dankoe-writing`
-- 设计产品、报价、服务、课程、咨询 -> `dankoe-offer`
-- 内容定位、内容支柱、选题系统 -> `dankoe-content`
-- 一人公司整体路线 -> `dankoe-roadmap`
-- AI 工作流、知识库工作台、自动化交付 -> `dankoe-ai-system`
+- 从哪里开始学、先看哪些、学习答疑 -> `dks-learning-map`
+- 写公众号、朋友圈、小红书、Newsletter、脚本 -> `dks-writing`
+- 设计产品、报价、服务、课程、咨询 -> `dks-offer`
+- 内容定位、内容支柱、选题系统 -> `dks-content`
+- 一人公司整体路线 -> `dks-roadmap`
+- AI 工作流、知识库工作台、自动化交付 -> `dks-ai-system`
 
 ## 检索摘要
 
