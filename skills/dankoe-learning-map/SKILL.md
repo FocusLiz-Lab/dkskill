@@ -45,6 +45,8 @@ If the user already says "我是做自媒体的，我需要先看哪些", skip b
 
 Use this mode when the user asks "X 讲的是什么", "用大白话解释", "这段哲学是什么意思", "我看不懂", "解释某个 Dankoe 概念/文章/视频/课程章节", especially for focus, attention, purpose, meaning, philosophy, self-education, deep work, or life-design questions.
 
+This mode is mutually exclusive with `Answering Learning Questions`, `Standard Learning Plan`, and the general `Output Template`. If this mode applies, do not also output "先看哪个", "先看哪一份材料", "7 天启动计划", "30 天学习顺序", or a second recommendation block unless the user explicitly asks for a reading order.
+
 Fast retrieval rules:
 
 1. If local atoms already exist at `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl` or `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl`, use local atoms first for this mode.
@@ -67,6 +69,8 @@ Output this structure:
 ```
 
 Keep it short, concrete, and beginner-friendly. Avoid turning the answer into a full learning roadmap unless the user asks what to study next.
+
+Anti-duplication rule: produce the answer once. Do not restate the same conclusion under a second heading. If a reading suggestion is useful, add one final sentence only, such as `想继续读的话，下一步看《目标与利润》。`
 
 ## Learner Routes
 
@@ -173,6 +177,8 @@ Route next to `$dankoe-roadmap` if the user needs business direction.
 ## Answering Learning Questions
 
 When the user asks a question during learning, answer in this structure:
+
+Do not use this structure when `Concept Explanation Mode` applies. Concept-explanation answers should use their own short plain-language structure and must not repeat the same recommendation under this template.
 
 ```markdown
 ## 你现在问的其实是

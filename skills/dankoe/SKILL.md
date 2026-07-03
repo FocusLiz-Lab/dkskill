@@ -31,6 +31,19 @@ Dankoe 终极版 | 深度觉醒（持续更新）
 | Wants to write a specific essay, newsletter, thread, script, or posts | `$dankoe-writing` | The user has an idea, topic, note, transcript, article draft, or content angle and wants it turned into sharp writing. |
 | Wants AI workflows for a solo business | `$dankoe-ai-system` | The user asks how to use AI to research, write, build, sell, operate, learn faster, or systemize a one-person business. |
 
+## Concept Explanation Fast Path
+
+If the user asks what a Dankoe idea, essay, video, course section, philosophy, focus concept, life-design concept, or abstract principle "means" and wants it explained in plain language, treat it as a learning/explanation task, not a business case task.
+
+Use this fast path before the commercial case gate, before broad IMA troubleshooting, and before general learning-plan templates:
+
+1. Route to `$dankoe-learning-map` unless the user asks to write publishable content.
+2. Use the local Dankoe atom library first when it is already installed. Search only the most specific title/phrase and 1 to 2 adjacent concepts, such as `专注的艺术`, `Art of Focus`, `attention`, `purpose`, or `深度工作`.
+3. Do not install, check, or search `$commercial-case-library` for pure philosophy, focus, attention, meaning, life design, or concept-explanation questions unless the user explicitly asks for business cases or monetization examples.
+4. Do not run a full library bootstrap when either `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl` or `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl` already exists.
+5. Answer in plain language once, then optionally add a short "怎么用" section.
+6. Do not also output a learning roadmap, "先看哪个", "7 天启动计划", or a second recommendation block unless the user explicitly asks what to read next.
+
 ## Commercial Case Library Gate
 
 If the user's request needs commercial cases, business examples, benchmark projects, case studies, teardown examples, market examples, monetization examples, 生财有术案例, or asks to "找案例/拆案例/参考案例/对标/商业案例库", treat the commercial case atom library as a required dependency. Do not ask the user whether to download it; install/check it automatically.
@@ -60,18 +73,6 @@ python scripts/download_cases.py
 3. Continue the original task after the download succeeds.
 
 Only stop and ask the user for help if installation, network access, or filesystem writes fail. If that happens, explain the failure and give the exact command the user can run manually.
-
-## Concept Explanation Fast Path
-
-If the user asks what a Dankoe idea, essay, video, course section, philosophy, focus concept, life-design concept, or abstract principle "means" and wants it explained in plain language, treat it as a learning/explanation task, not a business case task.
-
-Use this fast path before the commercial case gate and before broad IMA troubleshooting:
-
-1. Route to `$dankoe-learning-map` unless the user asks to write publishable content.
-2. Use the local Dankoe atom library first when it is already installed. Search only the most specific title/phrase and 1 to 2 adjacent concepts, such as `专注的艺术`, `Art of Focus`, `attention`, `purpose`, or `深度工作`.
-3. Do not install, check, or search `$commercial-case-library` for pure philosophy, focus, attention, meaning, life design, or concept-explanation questions unless the user explicitly asks for business cases or monetization examples.
-4. Do not run a full library bootstrap when either `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl` or `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl` already exists.
-5. Answer in plain language first, then optionally add a short "怎么用" section.
 
 ## Local Atom Bootstrap
 
