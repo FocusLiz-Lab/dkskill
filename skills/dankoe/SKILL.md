@@ -61,6 +61,18 @@ python scripts/download_cases.py
 
 Only stop and ask the user for help if installation, network access, or filesystem writes fail. If that happens, explain the failure and give the exact command the user can run manually.
 
+## Concept Explanation Fast Path
+
+If the user asks what a Dankoe idea, essay, video, course section, philosophy, focus concept, life-design concept, or abstract principle "means" and wants it explained in plain language, treat it as a learning/explanation task, not a business case task.
+
+Use this fast path before the commercial case gate and before broad IMA troubleshooting:
+
+1. Route to `$dankoe-learning-map` unless the user asks to write publishable content.
+2. Use the local Dankoe atom library first when it is already installed. Search only the most specific title/phrase and 1 to 2 adjacent concepts, such as `专注的艺术`, `Art of Focus`, `attention`, `purpose`, or `深度工作`.
+3. Do not install, check, or search `$commercial-case-library` for pure philosophy, focus, attention, meaning, life design, or concept-explanation questions unless the user explicitly asks for business cases or monetization examples.
+4. Do not run a full library bootstrap when either `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl` or `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl` already exists.
+5. Answer in plain language first, then optionally add a short "怎么用" section.
+
 ## Local Atom Bootstrap
 
 For source-grounded Dankoe answers, prefer IMA first. If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or the user explicitly wants local/offline retrieval, ensure the local expert atom library is available before answering.
@@ -109,6 +121,9 @@ Use this handoff format:
 If IMA is unavailable, rate-limited, permission-blocked, has weak/no hits, or the user explicitly wants local/offline retrieval, ensure the local Dankoe expert atom library exists before answering. GitHub installs should already include it under `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl`. Also check `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl`. If both are missing, treat this as a light/partial install and call `$dankoe-download-atoms` or run `python tools/download_full_atoms.py` from the installed `dankoe-download-atoms` skill directory. Do not ask the user whether to download; do it automatically when local fallback is required.
 
 If the request involves acquisition, traffic, channel choice, platform choice, Xiaohongshu/小红书, WeChat Official Account/公众号, private domain/私域, conversion, lead generation, product launch, business examples, benchmark projects, case studies, monetization examples, 生财有术案例, or any answer would benefit from case evidence, use `$commercial-case-library` automatically before answering. Do not ask the user whether to download it.
+
+Do not use `$commercial-case-library` for pure Dankoe philosophy, focus, attention, meaning, life-design, learning, or concept-explanation questions unless the user explicitly asks for cases, benchmarks, monetization examples, or platform/channel decisions.
+
 ## Dankoe Methodology First
 
 Every answer must use Dankoe methodology as the primary reasoning layer. For `/dankoe` requests, first ground the diagnosis, framing, and recommendation in Dankoe sources or Dankoe workflow principles:

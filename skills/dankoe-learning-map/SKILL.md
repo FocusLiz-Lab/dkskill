@@ -41,6 +41,33 @@ Ask only for missing information:
 
 If the user already says "我是做自媒体的，我需要先看哪些", skip broad intake and provide the self-media path.
 
+## Concept Explanation Mode
+
+Use this mode when the user asks "X 讲的是什么", "用大白话解释", "这段哲学是什么意思", "我看不懂", "解释某个 Dankoe 概念/文章/视频/课程章节", especially for focus, attention, purpose, meaning, philosophy, self-education, deep work, or life-design questions.
+
+Fast retrieval rules:
+
+1. If local atoms already exist at `~/.agents/skills/dankoe/知识库/原子库/atoms.jsonl` or `~/.agents/skills/dankoe-download-atoms/知识库/原子库/atoms.jsonl`, use local atoms first for this mode.
+2. Search only the exact title/phrase and 1 to 2 adjacent concepts. Do not fan out across the full knowledge base.
+3. Do not use `$commercial-case-library` unless the user explicitly asks for cases, monetization, benchmark examples, or platform/channel decisions.
+4. Do not spend time downloading or refreshing atoms if either local atom file exists.
+
+Output this structure:
+
+```markdown
+## 一句话
+
+## 大白话解释
+
+## 他其实在反对什么
+
+## 你怎么用
+
+## 最容易误解的点
+```
+
+Keep it short, concrete, and beginner-friendly. Avoid turning the answer into a full learning roadmap unless the user asks what to study next.
+
 ## Learner Routes
 
 ### Route A: Self-Media / Personal Brand
