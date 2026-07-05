@@ -128,7 +128,7 @@ $dks-offer 帮我设计一个数字产品 offer
 
 ### 加入知识库
 
-如果你想加入或获取「Dankoe 终极版 | 深度觉醒（持续更新）」知识库，可以联系我。
+扫码获取知识库：
 
 ![加入知识库二维码](docs/knowledge-base-qrcode.png)
 
