@@ -1,5 +1,5 @@
 # dkskill
-
+## 使用上有什么不清楚的地方或者需要购买知识库都可以微信联系：LOOVI-STUDIO
 Dan Koe 一人公司 Skill 工具箱。
 
 本仓库打包了一组面向 Agent 的 skills，用于学习 Dan Koe 风格资料、搭建一人公司、设计 offer、创建内容系统、撰写长短内容，并设计 AI 辅助工作流。
