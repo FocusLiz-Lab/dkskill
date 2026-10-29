@@ -3,6 +3,17 @@ name: dks-roadmap
 description: Build a Dankoe-style one-person company roadmap with local atom-library grounding; IMA retrieval only when explicitly requested. Use when the user wants to start or redesign a one-person business, turn themselves into a business, combine interests into a niche, choose a direction, create a personal brand path, or map the path from skill/interests/problems to audience, offer, and revenue. Triggers include /dks-roadmap, 一人公司路线图, 将自己产品化, niche, personal monopoly, creator business roadmap.
 ---
 
+## 手动更新路由
+
+用户明确要求“更新 skill / 检查更新 / 同步最新原子库”时，先执行此路由。使用当前 SKILL.md 所在目录解析脚本绝对路径：
+
+```text
+python "{skillDir}/tools/update_skill.py"
+```
+
+只检查时加 `--check`。脚本从 GitHub main 的固定提交同步本仓库整套 skill 和原子资料，覆盖前备份，写入失败回滚；不需要 Git 或 GitHub 登录。根据脚本实际结果报告当前提交、更新状态与失败原因。普通业务问题不自动更新。更新后重新读取相关 SKILL.md。
+
+
 # dks-roadmap
 
 Help the user turn their interests, skills, problems, and lived experience into a practical one-person company roadmap.

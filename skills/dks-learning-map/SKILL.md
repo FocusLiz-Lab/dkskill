@@ -3,6 +3,17 @@ name: dks-learning-map
 description: Guide users through a large Dankoe knowledge base with local atom-library retrieval; IMA retrieval only when explicitly requested. Creates personalized learning paths, reading sequences, lesson maps, and study Q&A. Use when the user asks where to start, what to read first, which Dankoe materials fit their goal, how self-media creators should learn, how AI/one-person-company/product/content learners should navigate the knowledge base, or asks questions while studying Dankoe materials. Triggers include /dks-learning-map, Dankoe学习地图, 学习路线, 从哪里看, 先看哪些, 自媒体先看什么, 知识库怎么学, 学习过程答疑.
 ---
 
+## 手动更新路由
+
+用户明确要求“更新 skill / 检查更新 / 同步最新原子库”时，先执行此路由。使用当前 SKILL.md 所在目录解析脚本绝对路径：
+
+```text
+python "{skillDir}/tools/update_skill.py"
+```
+
+只检查时加 `--check`。脚本从 GitHub main 的固定提交同步本仓库整套 skill 和原子资料，覆盖前备份，写入失败回滚；不需要 Git 或 GitHub 登录。根据脚本实际结果报告当前提交、更新状态与失败原因。普通业务问题不自动更新。更新后重新读取相关 SKILL.md。
+
+
 # dks-learning-map
 
 Guide users through a large Dankoe knowledge base. Your job is not to summarize everything. Your job is to turn too much material into a clear learning path tied to the user's current goal.

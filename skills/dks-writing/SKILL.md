@@ -3,6 +3,17 @@ name: dks-writing
 description: Dankoe-style writing system with local atom-library grounding; IMA retrieval only when explicitly requested for turning ideas, notes, knowledge base material, transcripts, personal experience, or business insights into essays, newsletters, social posts, threads, short video scripts, and offer-supporting content. Use when the user asks to write, rewrite, outline, sharpen, expand, extract posts from long-form content, create a 2-hour writing workflow, or make content sound more specific, useful, and personal. Triggers include /dks-writing, 写作, 2小时写作, newsletter, essay, thread, post, long-form, 短文案, 长文, 写一篇文章.
 ---
 
+## 手动更新路由
+
+用户明确要求“更新 skill / 检查更新 / 同步最新原子库”时，先执行此路由。使用当前 SKILL.md 所在目录解析脚本绝对路径：
+
+```text
+python "{skillDir}/tools/update_skill.py"
+```
+
+只检查时加 `--check`。脚本从 GitHub main 的固定提交同步本仓库整套 skill 和原子资料，覆盖前备份，写入失败回滚；不需要 Git 或 GitHub 登录。根据脚本实际结果报告当前提交、更新状态与失败原因。普通业务问题不自动更新。更新后重新读取相关 SKILL.md。
+
+
 # dks-writing
 
 Help the user turn one idea into clear, specific, useful writing that supports a one-person company. The goal is not decorative prose. The goal is public thinking that builds trust, attracts the right people, and can bridge to an offer.
